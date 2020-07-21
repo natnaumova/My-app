@@ -1,0 +1,105 @@
+body {
+  width: 500px;
+  margin: 40px auto;
+}
+h1,
+h2,
+p,
+span,
+i,
+button,
+.day,
+.form-control {
+  color: #4d617c;
+  font-family: "Poppins", sans-serif;
+}
+button {
+  border: none;
+  background-color: transparent;
+}
+
+h1 {
+  visibility: hidden;
+  padding-left: 15px;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+h2 {
+  font-size: 48px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+i,
+span,
+#weather-description,
+.day {
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 0px;
+  text-align: center;
+}
+.p,
+.form-control {
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 0px;
+}
+
+#current-temperature {
+  font-size: 72px;
+  font-weight: 600;
+}
+#c,
+#f,
+#test,
+#slash {
+  font-size: 28px;
+  font-weight: 400;
+  vertical-align: 80%;
+}
+
+.date,
+.time {
+  margin-bottom: 0px;
+}
+img,
+.rain {
+  display: block;
+  margin: 10px auto;
+}
+.today {
+  height: 150px;
+  margin: 70px auto;
+  margin-bottom: 11px;
+}
+.cloudsunny,
+.cloud,
+.sunny {
+  height: 70px;
+}
+.rain {
+  text-align: center;
+}
+.form-inline {
+  margin-top: 40px;
+}
+.row {
+  margin-top: 30px;
+}
+#location {
+  color: #4d617c;
+  font-family: "Poppins", sans-serif;
+}
+.btn {
+  color: #4d617c;
+  border: none;
+}
+
+.form-inline .form-control {
+  width: 386px;
+}
+a {
+  margin: 16px;
+}
