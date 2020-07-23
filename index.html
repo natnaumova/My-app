@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="src/style.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
     <script
@@ -22,103 +22,106 @@
   </head>
 
   <body>
-    <div class="container">
-      <h1>
-        Latest weather forecast
-      </h1>
-      <form class="form-inline" id="search-form">
-        <div class="form-group mx-sm-3 mb-2">
-          <input
-            type="text"
-            class="form-control form-control-lg"
-            id="location"
-            placeholder="Enter location"
-          />
-        </div>
-
-        <button type="submit" class="btn btn-outline-primary mb-2 btn-lg">
-          <i class="fas fa-search"></i>
-        </button>
-      </form>
-      <a href="#" id="use-current-location">Use current location</a>
+    <div class="outer-box-frame">
       <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <h2 id="city"></h2>
-
-            <p class="date" id="date">
-              Tuesday 09 July
-            </p>
-            <br />
-
-            <span id="current-temperature"></span>
-            <button id="c"><b>°C</b></button>
-            <span id="slash">|</span><button id="f">°F</button>
-
-            <br />
-
-            <i class="fas fa-arrow-up"></i> <span id="max">23°</span>
-            &nbsp;&nbsp;
-            <i class="fas fa-arrow-down"></i> <span id="min">20°</span>
+        <h1>
+          Latest weather forecast
+        </h1>
+        <form class="form-inline" id="search-form">
+          <div class="form-group mx-sm-3 mb-2">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="location"
+              placeholder="Enter location"
+            />
           </div>
 
-          <div class="col-sm">
-            <img
-              src="https://i.ibb.co/gPdPwPJ/sunny.png"
-              alt="today-weather"
-              class="today"
-            />
+          <button type="submit" class="btn btn-outline-primary mb-2 btn-lg">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
 
-            <p id="weather-description"></p>
+        <div class="container">
+          <a href="#" id="use-current-location">Use current location</a>
+          <div class="row">
+            <div class="col-sm">
+              <h2 id="city"></h2>
+
+              <p class="date" id="date">
+                Tuesday 09 July
+              </p>
+              <br />
+
+              <span id="current-temperature"></span>
+              <button id="c"><b>°C</b></button>
+              <span id="slash">|</span><button id="f">°F</button>
+
+              <br />
+
+              <i class="fas fa-arrow-up"></i> <span id="max">23°</span>
+              &nbsp;&nbsp;
+              <i class="fas fa-arrow-down"></i> <span id="min">20°</span>
+            </div>
+
+            <div class="col-sm">
+              <img
+                src="https://i.ibb.co/gPdPwPJ/sunny.png"
+                alt="today-weather"
+                class="today"
+              />
+
+              <p id="weather-description"></p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm day">
-            Wed <br />
-            <img
-              src="https://i.ibb.co/qJNwJnX/cloudsunny.png"
-              alt="cloudsunny"
-              class="cloudsunny"
-            />
-            20°C
-          </div>
-          <div class="col-sm day">
-            Thur <br />
-            <img
-              src="https://i.ibb.co/DMQj98p/cloud.png"
-              alt="cloud"
-              class="cloud"
-            />
-            19°C
-          </div>
-          <div class="col-sm day">
-            Fri <br />
-            <img
-              src="https://i.ibb.co/qJNwJnX/cloudsunny.png"
-              alt="cloudsunny"
-              class="cloudsunny"
-            />
-            15°C
-          </div>
-          <div class="col-sm day">
-            Sat <br />
-            <img
-              src="https://i.ibb.co/DMQj98p/cloud.png"
-              alt="cloud"
-              class="cloud"
-            />
-            17°C
-          </div>
-          <div class="col-sm day">
-            Sun <br />
-            <img
-              src="https://i.ibb.co/whM4JbN/sunny.png"
-              alt="sunny"
-              class="sunny"
-            />
-            23°C
+        <div class="container">
+          <div class="row">
+            <div class="col-sm day">
+              Wed <br />
+              <img
+                src="https://i.ibb.co/qJNwJnX/cloudsunny.png"
+                alt="cloudsunny"
+                class="cloudsunny"
+              />
+              20°C
+            </div>
+            <div class="col-sm day">
+              Thur <br />
+              <img
+                src="https://i.ibb.co/DMQj98p/cloud.png"
+                alt="cloud"
+                class="cloud"
+              />
+              19°C
+            </div>
+            <div class="col-sm day">
+              Fri <br />
+              <img
+                src="https://i.ibb.co/qJNwJnX/cloudsunny.png"
+                alt="cloudsunny"
+                class="cloudsunny"
+              />
+              15°C
+            </div>
+            <div class="col-sm day">
+              Sat <br />
+              <img
+                src="https://i.ibb.co/DMQj98p/cloud.png"
+                alt="cloud"
+                class="cloud"
+              />
+              17°C
+            </div>
+            <div class="col-sm day">
+              Sun <br />
+              <img
+                src="https://i.ibb.co/whM4JbN/sunny.png"
+                alt="sunny"
+                class="sunny"
+              />
+              23°C
+            </div>
           </div>
         </div>
       </div>
