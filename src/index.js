@@ -16,8 +16,15 @@ function callApi(event) {
   searchLocation(cityName);
 }
 
+//Descripyion
+const capitalize = (s) => {
+  if (typeof s !== "string") return "";
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+
 //Temperature in given location
 function showResponse(response) {
+  console.log(response.data);
   let cityElement = document.querySelector("#city");
   let city = response.data.name;
   cityElement.innerHTML = city;
@@ -28,7 +35,7 @@ function showResponse(response) {
 
   let weatherDescription = document.querySelector("#weather-description");
   let description = response.data.weather[0].description;
-  weatherDescription.innerHTML = `Right now: ${description}`;
+  weatherDescription.innerHTML = description;
 
   let tempMax = document.querySelector("#max");
   let maximum = `${Math.round(response.data.main.temp_max)}°`;
@@ -76,7 +83,7 @@ function formatDate() {
   ];
 
   let day = days[now.getDay()];
-  let date = `${currentHours}:${currentMinutes}, ${day} ${currentDate} ${month}`;
+  let date = `Last updated: ${currentHours}:${currentMinutes} ${day} ${currentDate} ${month}`;
   return date;
 }
 
@@ -112,7 +119,7 @@ function showTemperature(response) {
 
   let weatherDescription = document.querySelector("#weather-description");
   let description = response.data.weather[0].description;
-  weatherDescription.innerHTML = `Right now: ${description}`;
+  weatherDescription.innerHTML = capitalize(description);
 
   let tempMax = document.querySelector("#max");
   let maximum = `${Math.round(response.data.main.temp_max)}°`;
@@ -124,6 +131,7 @@ function showTemperature(response) {
 
   return response;
 }
+
 let yourTemperature = document.querySelector("#current-temperature");
 
 function showCurrentLocation(response) {
@@ -138,7 +146,7 @@ function convert(event) {
   let tempF = document.querySelector("#current-temperature");
   let cityInput = document.querySelector("#location");
   let cityName = cityInput.value;
-  let units = c;
+  let units = `imperial`;
   let apiKey = `c03834cf1345f1efcc7cef1a8984136b`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${units}`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showResponse);
