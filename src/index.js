@@ -16,15 +16,16 @@ function callApi(event) {
   searchLocation(cityName);
 }
 
-//Descripyion
-const capitalize = (s) => {
-  if (typeof s !== "string") return "";
-  return s.charAt(0).toUpperCase() + s.slice(1);
-};
-
 //Temperature in given location
 function showResponse(response) {
   console.log(response.data);
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+
   let cityElement = document.querySelector("#city");
   let city = response.data.name;
   cityElement.innerHTML = city;
@@ -83,7 +84,7 @@ function formatDate() {
   ];
 
   let day = days[now.getDay()];
-  let date = `Last updated: ${currentHours}:${currentMinutes} ${day} ${currentDate} ${month}`;
+  let date = `${currentHours}:${currentMinutes} ${day} ${currentDate} ${month}`;
   return date;
 }
 
@@ -109,17 +110,13 @@ function handlePosition(position) {
     .then(showTemperature)
     .then(showCurrentLocation);
 }
-//On load
-//navigator.geolocation.getCurrentPosition(handlePosition);
-useCurrentLocation();
-
+//Display temperature
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   yourTemperature.innerHTML = temperature;
 
   let weatherDescription = document.querySelector("#weather-description");
   let description = response.data.weather[0].description;
-  weatherDescription.innerHTML = capitalize(description);
 
   let tempMax = document.querySelector("#max");
   let maximum = `${Math.round(response.data.main.temp_max)}°`;
@@ -183,3 +180,8 @@ function getUnits(event) {
   event.preventDefault();
   let units = `imperial`;
 }
+
+//On load
+//navigator.geolocation.getCurrentPosition(handlePosition);
+//useCurrentLocation();
+searchLocation("New York");

@@ -44,13 +44,11 @@
 
         <div class="container">
           <a href="#" id="use-current-location">Use current location</a>
+          <h2 id="city"></h2>
           <div class="row">
             <div class="col-sm">
-              <h2 id="city"></h2>
-
-              <p class="date" id="date">
-                Tuesday 09 July
-              </p>
+              <p>Last updated:</p>
+              <p class="date" id="date"></p>
 
               <span id="current-temperature"></span>
               <button id="c"><b>°C</b></button>
@@ -68,6 +66,7 @@
                 src="https://i.ibb.co/gPdPwPJ/sunny.png"
                 alt="today-weather"
                 class="today"
+                id="icon"
               />
 
               <p id="weather-description"></p>
@@ -75,7 +74,7 @@
           </div>
         </div>
         <div class="container">
-          <div class="row">
+          <div class="row" id="forecast">
             <div class="col-sm day">
               Wed <br />
               <img
@@ -125,12 +124,12 @@
         </div>
       </div>
     </div>
-    <footer>
+    <small>
       <a href="https://github.com/natnaumova/My-app" target="_blank"
         >Open sourse code</a
       >
       by Natalia Naumova
-    </footer>
+    </small>
     <script src="src/index.js"></script>
   </body>
 </html>

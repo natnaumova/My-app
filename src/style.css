@@ -35,7 +35,8 @@ h1 {
 h2 {
   font-size: 48px;
   font-weight: 600;
-  margin-top: 10px;
+  margin-top: 50px;
+  margin-bottom: 0;
 }
 
 i,
@@ -47,11 +48,15 @@ span,
   margin-top: 0px;
   text-align: center;
 }
-.p,
+#weather-description:first-letter {
+  text-transform: capitalize;
+}
+p,
 .form-control {
   font-size: 18px;
   font-weight: 400;
   margin-top: 0px;
+  margin-block-end: 0px;
 }
 
 #current-temperature {
@@ -66,10 +71,14 @@ span,
   font-weight: 400;
   vertical-align: 80%;
 }
-
+.row,
 .date,
 .time {
+  margin-top: 0px;
   margin-bottom: 0px;
+}
+#forecast {
+  margin-top: 50px;
 }
 img,
 .rain {
@@ -78,7 +87,7 @@ img,
 }
 .today {
   height: 150px;
-  margin: 70px auto;
+  margin: 0 auto;
   margin-bottom: 11px;
 }
 .cloudsunny,
@@ -92,9 +101,7 @@ img,
 .form-inline {
   margin-top: 40px;
 }
-.row {
-  margin-top: 30px;
-}
+
 #location {
   color: #4d617c;
 }
@@ -106,10 +113,11 @@ img,
 .form-inline .form-control {
   width: 386px;
 }
-footer {
+small {
   color: #4d617c;
   font-size: 14px;
   font-weight: 300;
-  margin-top: 20px;
+  display: block;
+  margin: 20px auto;
   text-align: center;
 }
