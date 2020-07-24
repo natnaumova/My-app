@@ -30,8 +30,9 @@ function showResponse(response) {
   let city = response.data.name;
   cityElement.innerHTML = city;
 
+  cTemp = response.data.main.temp;
   let tempElement = document.querySelector("#current-temperature");
-  let temperature = Math.round(response.data.main.temp);
+  let temperature = Math.round(cTemp);
   tempElement.innerHTML = `${temperature}`;
 
   let weatherDescription = document.querySelector("#weather-description");
@@ -138,41 +139,12 @@ function showCurrentLocation(response) {
 let yourLocation = document.querySelector("#city");
 
 //Units converting
-function convert(event) {
-  event.preventDefault();
-  let tempF = document.querySelector("#current-temperature");
-  let cityInput = document.querySelector("#location");
-  let cityName = cityInput.value;
-  let units = `imperial`;
-  let apiKey = `c03834cf1345f1efcc7cef1a8984136b`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${units}`;
-  axios.get(`${apiUrl}&appid=${apiKey}`).then(showResponse);
-  let searchForm = document.querySelector("#search-form");
-  tempF.addEventListener("click", convertBack);
-
-  buttonF.innerHTML = "<b>°F</b>";
-  buttonC.innerHTML = "°C";
-}
 
 let buttonF = document.querySelector("#f");
-buttonF.addEventListener("click", convert);
+buttonF.addEventListener("click", displayFTemp);
 
-function convertBack(event) {
-  event.preventDefault();
-  let tempC = document.querySelector("#current-temperature");
-  let cityInput = document.querySelector("#location");
-  let cityName = cityInput.value;
-  let units = `metric`;
-  let apiKey = `c03834cf1345f1efcc7cef1a8984136b`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${units}`;
-  axios.get(`${apiUrl}&appid=${apiKey}`).then(showResponse);
-  let searchForm = document.querySelector("#search-form");
-  tempC.addEventListener("click", convert);
-  buttonC.innerHTML = "<b>°C</b>";
-  buttonF.innerHTML = "°F";
-}
 let buttonC = document.querySelector("#c");
-buttonC.addEventListener("click", convertBack);
+buttonC.addEventListener("click", displayCTemp);
 
 //if F pressed - call API with units = imperial,
 //else - call API with units = metric
@@ -181,7 +153,22 @@ function getUnits(event) {
   let units = `imperial`;
 }
 
+function displayFTemp(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#current-temperature");
+  buttonF.classList.add("active");
+  buttonC.classList.remove("active");
+  let fTemp = (cTemp * 9) / 5 + 32;
+  tempElement.innerHTML = Math.round(fTemp);
+}
+
+function displayCTemp(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#current-temperature");
+  buttonF.classList.remove("active");
+  buttonC.classList.add("active");
+  tempElement.innerHTML = Math.round(cTemp);
+}
 //On load
-//navigator.geolocation.getCurrentPosition(handlePosition);
-//useCurrentLocation();
+let cTemp = null;
 searchLocation("New York");

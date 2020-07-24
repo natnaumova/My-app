@@ -23,8 +23,12 @@ button,
 button {
   border: none;
   background-color: transparent;
+  font-weight: 300;
 }
-
+button:focus {
+  outline: none !important;
+  box-shadow: none;
+}
 h1 {
   visibility: hidden;
   padding-left: 15px;
@@ -68,7 +72,6 @@ p,
 #test,
 #slash {
   font-size: 28px;
-  font-weight: 400;
   vertical-align: 80%;
 }
 .row,
@@ -137,4 +140,8 @@ small {
   border: 1px solid #ced4d9;
   border-radius: 6px;
   margin: 0 16px 10px 16px;
+}
+
+.row .col-sm .active {
+  font-weight: 700;
 }
