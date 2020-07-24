@@ -2,7 +2,6 @@
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", callApi);
 
-//Call API
 function searchLocation(cityName) {
   let units = `metric`;
   let apiKey = `c03834cf1345f1efcc7cef1a8984136b`;
@@ -14,6 +13,7 @@ function callApi(event) {
   event.preventDefault();
   let cityName = document.querySelector("#location").value;
   searchLocation(cityName);
+  searchForm.reset();
 }
 
 //Temperature in given location
