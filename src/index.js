@@ -74,6 +74,9 @@ function showResponse(response) {
   let minTempElement = document.querySelector("#min");
   let minTemp = `${Math.round(minCTemp)}°`;
   minTempElement.innerHTML = `${minTemp}`;
+
+  buttonF.classList.remove("active");
+  buttonC.classList.add("active");
 }
 
 //Time and Date
@@ -147,6 +150,8 @@ function handlePosition(position) {
     .get(`${apiUrl}&appid=${apiKey}`)
     .then(showTemperature)
     .then(showCurrentLocation);
+  buttonF.classList.remove("active");
+  buttonC.classList.add("active");
 }
 //Display temperature
 function showTemperature(response) {
