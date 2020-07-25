@@ -2,11 +2,38 @@
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", callApi);
 
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 5; index++) {
+    let forecast = response.data.list[index];
+    forecastElement.innerHTML += `<div class="col-sm day">
+              ${formatHours(forecast.dt * 1000)} <br />
+              <img
+                src="https://openweathermap.org/img/wn/${
+                  forecast.weather[0].icon
+                }@2x.png"
+                class="cloudsunny"
+              />
+              <b>${Math.round(forecast.main.temp_max)}°C</b><br />${Math.round(
+      forecast.main.temp_min
+    )}°C
+            </div>`;
+  }
+
+  console.log(forecast);
+}
+
 function searchLocation(cityName) {
   let units = `metric`;
   let apiKey = `c03834cf1345f1efcc7cef1a8984136b`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${units}`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showResponse);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=${units}`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
 }
 
 function callApi(event) {
@@ -18,7 +45,6 @@ function callApi(event) {
 
 //Temperature in given location
 function showResponse(response) {
-  console.log(response.data);
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
@@ -39,13 +65,15 @@ function showResponse(response) {
   let description = response.data.weather[0].description;
   weatherDescription.innerHTML = description;
 
-  let tempMax = document.querySelector("#max");
-  let maximum = `${Math.round(response.data.main.temp_max)}°`;
-  tempMax.innerHTML = maximum;
+  maxCTemp = response.data.main.temp_max;
+  let maxTempElement = document.querySelector("#max");
+  let maxTemp = `${Math.round(maxCTemp)}°`;
+  maxTempElement.innerHTML = `${maxTemp}`;
 
-  let tempMin = document.querySelector("#min");
-  let minimum = `${Math.round(response.data.main.temp_min)}°`;
-  tempMin.innerHTML = minimum;
+  minCTemp = response.data.main.temp_min;
+  let minTempElement = document.querySelector("#min");
+  let minTemp = `${Math.round(minCTemp)}°`;
+  minTempElement.innerHTML = `${minTemp}`;
 }
 
 //Time and Date
@@ -91,6 +119,15 @@ function formatDate() {
 
 let dateLive = document.querySelector("#date");
 dateLive.innerHTML = formatDate();
+
+function formatHours(timestamp) {
+  let now = new Date();
+  let currentHours = now.getHours();
+  currentHours = ("0" + currentHours).slice(-2);
+  let currentMinutes = now.getMinutes();
+  currentMinutes = ("0" + currentMinutes).slice(-2);
+  return `${currentHours}:${currentMinutes}`;
+}
 
 //Current location
 let useCurrentLocationButton = document.querySelector("#use-current-location");
@@ -146,29 +183,40 @@ buttonF.addEventListener("click", displayFTemp);
 let buttonC = document.querySelector("#c");
 buttonC.addEventListener("click", displayCTemp);
 
-//if F pressed - call API with units = imperial,
-//else - call API with units = metric
-function getUnits(event) {
-  event.preventDefault();
-  let units = `imperial`;
-}
-
 function displayFTemp(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#current-temperature");
+  let maxTempElement = document.querySelector("#max");
+  let minTempElement = document.querySelector("#min");
+
   buttonF.classList.add("active");
   buttonC.classList.remove("active");
+
   let fTemp = (cTemp * 9) / 5 + 32;
+  let maxFTemp = (maxCTemp * 9) / 5 + 32;
+  let minFTemp = (minCTemp * 9) / 5 + 32;
+
   tempElement.innerHTML = Math.round(fTemp);
+  maxTempElement.innerHTML = `${Math.round(maxFTemp)}°`;
+  minTempElement.innerHTML = `${Math.round(minFTemp)}°`;
 }
 
 function displayCTemp(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#current-temperature");
+  let maxTempElement = document.querySelector("#max");
+  let minTempElement = document.querySelector("#min");
+
   buttonF.classList.remove("active");
   buttonC.classList.add("active");
+
   tempElement.innerHTML = Math.round(cTemp);
+  maxTempElement.innerHTML = `${Math.round(maxCTemp)}°`;
+  minTempElement.innerHTML = `${Math.round(minCTemp)}°`;
 }
+
 //On load
 let cTemp = null;
+let maxCTemp = null;
+let minCTemp = null;
 searchLocation("New York");
