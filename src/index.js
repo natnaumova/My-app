@@ -25,13 +25,29 @@ function displayForecast(response) {
 }
 
 function searchLocation(cityName) {
-  let units = `metric`;
   let apiKey = `c03834cf1345f1efcc7cef1a8984136b`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${units}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showResponse);
 
-  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=${units}`;
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
+}
+
+function handlePosition(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric`;
+  let apiKey = `c03834cf1345f1efcc7cef1a8984136b`;
+  axios
+    .get(`${apiUrl}&appid=${apiKey}`)
+    .then(showTemperature)
+    .then(showCurrentLocation);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
+
+  buttonF.classList.remove("active");
+  buttonC.classList.add("active");
 }
 
 function callApi(event) {
@@ -139,21 +155,6 @@ function useCurrentLocation() {
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
 
-function handlePosition(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric`;
-  let apiKey = `c03834cf1345f1efcc7cef1a8984136b`;
-  axios
-    .get(`${apiUrl}&appid=${apiKey}`)
-    .then(showTemperature)
-    .then(showCurrentLocation);
-
-  console.log(`${apiUrl}&appid=${apiKey}`);
-
-  buttonF.classList.remove("active");
-  buttonC.classList.add("active");
-}
 //Display temperature
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
@@ -162,15 +163,22 @@ function showTemperature(response) {
 
   let weatherDescription = document.querySelector("#weather-description");
   let description = response.data.weather[0].description;
+  weatherDescription.innerHTML = description;
+
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 
   let tempMax = document.querySelector("#max");
   let maximum = `${Math.round(response.data.main.temp_max)}°`;
-  maxCTemp = maximum;
+  maxCTemp = Math.round(response.data.main.temp_max);
   tempMax.innerHTML = maximum;
 
   let tempMin = document.querySelector("#min");
   let minimum = `${Math.round(response.data.main.temp_min)}°`;
-  minCTemp = minimum;
+  minCTemp = Math.round(response.data.main.temp_min);
   tempMin.innerHTML = minimum;
 
   return response;
