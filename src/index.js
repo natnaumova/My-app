@@ -22,8 +22,6 @@ function displayForecast(response) {
     )}°C
             </div>`;
   }
-
-  console.log(forecast);
 }
 
 function searchLocation(cityName) {
@@ -124,7 +122,7 @@ let dateLive = document.querySelector("#date");
 dateLive.innerHTML = formatDate();
 
 function formatHours(timestamp) {
-  let now = new Date();
+  let now = new Date(timestamp);
   let currentHours = now.getHours();
   currentHours = ("0" + currentHours).slice(-2);
   let currentMinutes = now.getMinutes();
@@ -150,6 +148,9 @@ function handlePosition(position) {
     .get(`${apiUrl}&appid=${apiKey}`)
     .then(showTemperature)
     .then(showCurrentLocation);
+
+  console.log(`${apiUrl}&appid=${apiKey}`);
+
   buttonF.classList.remove("active");
   buttonC.classList.add("active");
 }
