@@ -157,6 +157,7 @@ function handlePosition(position) {
 //Display temperature
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
+  cTemp = temperature;
   yourTemperature.innerHTML = temperature;
 
   let weatherDescription = document.querySelector("#weather-description");
@@ -164,10 +165,12 @@ function showTemperature(response) {
 
   let tempMax = document.querySelector("#max");
   let maximum = `${Math.round(response.data.main.temp_max)}°`;
+  maxCTemp = maximum;
   tempMax.innerHTML = maximum;
 
   let tempMin = document.querySelector("#min");
   let minimum = `${Math.round(response.data.main.temp_min)}°`;
+  minCTemp = minimum;
   tempMin.innerHTML = minimum;
 
   return response;
